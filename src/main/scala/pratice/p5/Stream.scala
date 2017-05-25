@@ -128,8 +128,15 @@ object Stream
     // 练习5.12 fibs
     def fibsUseUnfold(): Stream[Int] = unfold((0, 1))(pair => Some((pair._1, (pair._2, pair._1 + pair._2))))
 
+    // 练习5.12 fibs 这个代码没看明白
     def fibsViaUnfold2(): Stream[Int] = unfold((0, 1))
     {
         case (f0, f1) => Some((f0, (f1, f0 + f1)))
     }
+
+    // 练习5.12 from
+    def fromUseUnfold(n: Int): Stream[Int] = unfold(n)(z => Some((z, z + 1)))
+
+    // 练习5.12 constant
+    def constantUseUnfold[A](a: A): Stream[A] = unfold(a)(n => Some(n, n))
 }
