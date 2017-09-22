@@ -88,7 +88,7 @@ object List
     def foldRightViaFoldLeft_1[A, B](l: List[A], z: B)(f: (A, B) => B): B = foldLeft(l, (b: B) => b)((g, a) => b => g(f(a, b)))(z)
 
     // 练习3.14 用foldLeft或foldRight实现append函数
-    def append[A](l1: List[A], l2: List[A]): List[A] = foldRight(l1, l2)(Cons(_, _))
+    def appendUserFoldRight[A](l1: List[A], l2: List[A]): List[A] = foldRight(l1, l2)(Cons(_, _))
 
     // 练习3.15 写一个函数将一组列表连接成一个单个列表
     def concat[A](l: List[List[A]]): List[A] = foldRight(l, Nil: List[A])(append)

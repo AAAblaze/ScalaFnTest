@@ -77,7 +77,7 @@ sealed trait Stream[+A]
     def append[B >: A](other: => Stream[B]): Stream[B] = foldRight(other)(Stream.cons(_, _))
 
     // 练习5.7 flatMap
-    def flatMap[B](f: A => Stream[B]): Stream[B] = foldRight(Empty[B])(f(_).append(_))
+    def flatMap[B](f: A => Stream[B]): Stream[B] = foldRight(Empty: Stream[B])(f(_).append(_))
 
     // 练习5.13 map
     def mapUseUnfold[B](f: A => B): Stream[B] = Stream.unfold(this)
@@ -97,7 +97,7 @@ sealed trait Stream[+A]
     // 练习5.13 takeWhile
     def takeWhileUseUnfold(f: A => Boolean): Stream[A] = Stream.unfold(this)
     {
-        case Cons(h, t) if f() => Some(h(), t())
+        case Cons(h, t) if f(h()) => Some(h(), t())
         case _ => None
     }
 
@@ -129,7 +129,7 @@ object Stream
     // 练习5.8
     def constant[A](a: A): Stream[A] =
     {
-        lazy val ones = cons(a, ones)
+        lazy val ones: Stream[A] = cons(a, ones)
         ones
     }
 
